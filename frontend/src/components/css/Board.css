@@ -1,0 +1,22 @@
+.board {
+    display: grid;
+    grid-template-columns: repeat(11, 1fr);
+    grid-template-rows: repeat(11, 1fr);
+    gap: 10px;
+    width: 550px;
+    height: 550px;
+}
+
+.label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.tile {
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
