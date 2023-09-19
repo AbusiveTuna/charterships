@@ -21,7 +21,7 @@ function Tile({ location, hasShip, placeShip }) {
             className={`tile ${tileStatus} ${isOver ? 'Over' : ''} ${canDrop ? 'CanDrop' : ''}`} 
             ref={drop}
         >
-            {/* TODO: Display ship here if this tile has a ship */}
+            {}
         </div>
     );
 }

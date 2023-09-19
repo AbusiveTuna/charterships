@@ -16,23 +16,20 @@ function DroppableTile({ location, hasShip, placeShip, shipImage, shipPlacements
     if (hasShip) {
         tileStatus = 'HasShip';
     }
-
-    // Calculate the background position
     const number = parseInt(location.slice(1));
     const shipStart = Object.keys(shipPlacements).find(key => shipPlacements[key] === hasShip);
     const position = shipStart ? (number - parseInt(shipStart.slice(1))) * 100 : 0;
 
-    // Set the background image style
     const style = hasShip ? { backgroundImage: `url(${shipImage})`, backgroundPosition: `${position}% 0` } : {};
 
     return (
         <div 
             className={`tile ${tileStatus} ${isOver ? 'Over' : ''} ${canDrop ? 'CanDrop' : ''}`} 
             ref={drop}
-            style={style} // Apply the style here
+            style={style}
         >
-            {/* Display a ship here if this tile has a ship */}
-            {hasShip && <img src={shipImage} alt="Ship" style={{ width: '100%', height: '100%', visibility: 'hidden' }} />} {/* Hide the img element */}
+            {}
+            {hasShip && <img src={shipImage} alt="Ship" style={{ width: '100%', height: '100%', visibility: 'hidden' }} />} {}
         </div>
     );
 }

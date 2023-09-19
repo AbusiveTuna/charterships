@@ -26,7 +26,7 @@ const SetupPage = () => {
                 <p>This is the setup page for board with PIN: {boardPin}</p>
                 <div className="board-container">
                     <div className="board">
-                        <Board shipImages={shipImages} /> {/* Pass the shipImages prop */}
+                        <Board shipImages={shipImages} /> {}
                     </div>
                     <div className="ships">
                         <DraggableShip length={2} shipImage={shipImage} />
