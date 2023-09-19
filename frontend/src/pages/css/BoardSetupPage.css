@@ -1,0 +1,34 @@
+body {
+    background-color: BlanchedAlmond;
+}
+
+.setup-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+.board-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ships {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 50px; /* Add space to the left of the ships */
+}
+
+
+

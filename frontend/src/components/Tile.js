@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDrop } from 'react-dnd';
 
-function Tile() {
-    const [hasShip, setHasShip] = useState(false); // If a ship was placed in it
-    const [hasBeenShot, setHasBeenShot] = useState(false); // If the tile was shot
-
-    // Method to place a ship on the tile
-    function placeShip() {
-        setHasShip(true);
-    }
-
-    // Method to shoot the tile
-    function shootTile() {
-        setHasBeenShot(true);
-    }
+function Tile({ location, hasShip, placeShip }) {
+    const [{ isOver, canDrop }, drop] = useDrop({
+        accept: 'ship',
+        drop: (item) => placeShip(location, item.length),
+        collect: (monitor) => ({
+            isOver: !!monitor.isOver(),
+            canDrop: !!monitor.canDrop(),
+        }),
+    });
 
     let tileStatus = 'Empty';
-    if (hasBeenShot) {
-        tileStatus = hasShip ? 'Hit' : 'Miss';
+    if (hasShip) {
+        tileStatus = 'HasShip';
     }
-    
+
     return (
-        <div className={`tile ${tileStatus}`}>
+        <div 
+            className={`tile ${tileStatus} ${isOver ? 'Over' : ''} ${canDrop ? 'CanDrop' : ''}`} 
+            ref={drop}
+        >
+            {/* TODO: Display ship here if this tile has a ship */}
         </div>
     );
 }
