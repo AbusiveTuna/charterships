@@ -1,37 +1,31 @@
-import React, { useState } from 'react';
+import React, { useRef, useEffect } from 'react';
+import { useDrag } from 'react-dnd';
+import './css/Ship.css';
 
 function Ship({ length, shipImage }) {
-    const [locations, setLocations] = useState([]);
-    const [hits, setHits] = useState(Array(length).fill(false));
+    const ref = useRef(null);
+    const [{ isDragging }, drag, preview] = useDrag({
+        type: 'ship',
+        item: { length },
+        collect: (monitor) => ({
+            isDragging: !!monitor.isDragging(),
+        }),
+    });
 
-    const checkHit = (location) => {
-        const index = locations.indexOf(location);
-        if (index > -1) {
-            setHits(prevHits => {
-                const newHits = [...prevHits];
-                newHits[index] = true;
-                return newHits;
-            });
-            return true;
-        }
-        return false;
-    };
+    useEffect(() => {
+        const img = new Image();
+        img.src = shipImage;
+        img.onload = () => preview(img);
+    }, [shipImage, preview]);
 
-    const isSunk = () => {
-        return hits.every(hit => hit);
-    };
-
-    const handleDragStart = (e) => {
-        e.dataTransfer.setData('shipLength', length);
-    };
+    drag(ref);
 
     return (
         <img 
             src={shipImage} 
             alt="Ship" 
-            draggable 
-            onDragStart={handleDragStart} 
-            style={{ width: `${length * 50}px`, height: '50px' }} // Adjust size as necessary
+            ref={ref} 
+            style={{ width: `${length * 50}px`, height: '50px', opacity: isDragging ? 0.5 : 1 }} // Adjust size as necessary
         />
     );
 }

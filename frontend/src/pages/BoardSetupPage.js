@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Board from '../components/Board';
-import DraggableShip from '../components/DraggableShip'; 
+import DraggableShip from '../components/Ship'; 
 import shipImage from '../assets/testShip.png';
 import shipImage1 from '../assets/testShip1.png';
 import shipImage2 from '../assets/testShip2.png';

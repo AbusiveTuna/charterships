@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import DroppableTile from './DroppableTile';
+import DroppableTile from './Tile';
 import './css/Board.css';
 
 function Board({ shipImages }) { 
