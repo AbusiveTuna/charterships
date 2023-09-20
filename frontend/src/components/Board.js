@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DroppableTile from './Tile';
+import Tile from './Tile';
 import './css/Board.css';
 
-function Board({ shipImages }) { 
+function Board({ shipImages, ships, setShips, moveShip }) {
 
     const locations = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].flatMap(letter => Array.from({length: 10}, (_, i) => letter + (i + 1)));
 
@@ -27,6 +27,11 @@ function Board({ shipImages }) {
             }
             return newPlacements;
         });
+
+        setShips(prevShips => ({
+            ...prevShips,
+            [length]: { ...prevShips[length], placed: true }
+        }));
     };
 
     return (
@@ -36,10 +41,11 @@ function Board({ shipImages }) {
             {locations.map((location, index) => (
                 <React.Fragment key={location}>
                     {index % 10 === 0 && <div className="label">{location[0]}</div>}
-                    <DroppableTile 
+                    <Tile 
                         location={location} 
                         hasShip={shipPlacements[location]} 
                         placeShip={placeShip} 
+                        moveShip={moveShip} 
                         shipImage={shipImages[shipPlacements[location]]}
                         shipPlacements={shipPlacements}
                     />

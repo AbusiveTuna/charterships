@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import './css/Ship.css';
 
-function Ship({ length, shipImage }) {
+function Ship({ length, shipImage, ships, setShips }) {
     const ref = useRef(null);
     const [{ isDragging }, drag, preview] = useDrag({
         type: 'ship',
@@ -19,6 +19,10 @@ function Ship({ length, shipImage }) {
     }, [shipImage, preview]);
 
     drag(ref);
+
+    if (ships[length].placed) {
+        return null;
+    }
 
     return (
         <img 

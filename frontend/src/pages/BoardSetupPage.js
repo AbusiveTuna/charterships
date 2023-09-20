@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import Board from '../components/Board';
-import DraggableShip from '../components/Ship'; 
+import Ship from '../components/Ship'; 
 import shipImage from '../assets/testShip.png';
 import shipImage1 from '../assets/testShip1.png';
 import shipImage2 from '../assets/testShip2.png';
@@ -19,6 +19,32 @@ const SetupPage = () => {
         5: shipImage
     };
 
+    const [ships, setShips] = useState({
+        2: { length: 2, placed: false },
+        3: { length: 3, placed: false },
+        4: { length: 4, placed: false },
+        5: { length: 5, placed: false }
+    });
+
+    const [shipPlacements, setShipPlacements] = useState({});
+
+    const moveShip = (fromLocation, toLocation) => {
+        setShips(prevShips => {
+            const shipLength = shipPlacements[fromLocation];
+            const newShips = {...prevShips};
+            newShips[shipLength].placed = false;
+            return newShips;
+        });
+    
+        setShipPlacements(prevPlacements => {
+            const newPlacements = {...prevPlacements};
+            delete newPlacements[fromLocation];
+            newPlacements[toLocation] = shipPlacements[fromLocation];
+            return newPlacements;
+        });
+    };
+    
+    
     return (
         <DndProvider backend={HTML5Backend}>
             <div className="setup-page">
@@ -26,14 +52,14 @@ const SetupPage = () => {
                 <p>This is the setup page for board with PIN: {boardPin}</p>
                 <div className="board-container">
                     <div className="board">
-                        <Board shipImages={shipImages} /> {}
+                    <Board shipImages={shipImages} ships={ships} setShips={setShips} moveShip={moveShip} shipPlacements={shipPlacements} setShipPlacements={setShipPlacements} />
                     </div>
                     <div className="ships">
-                        <DraggableShip length={2} shipImage={shipImage} />
-                        <DraggableShip length={3} shipImage={shipImage1} />
-                        <DraggableShip length={3} shipImage={shipImage1} />
-                        <DraggableShip length={4} shipImage={shipImage2} />
-                        <DraggableShip length={5} shipImage={shipImage} />
+                        <Ship length={2} shipImage={shipImage} ships={ships} setShips={setShips} />
+                        <Ship length={3} shipImage={shipImage1} ships={ships} setShips={setShips} />
+                        <Ship length={3} shipImage={shipImage1} ships={ships} setShips={setShips} />
+                        <Ship length={4} shipImage={shipImage2} ships={ships} setShips={setShips} />
+                        <Ship length={5} shipImage={shipImage} ships={ships} setShips={setShips} />
                     </div>
                 </div>
             </div>
