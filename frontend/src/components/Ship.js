@@ -1,12 +1,19 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useState , useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import './css/Ship.css';
 
-function Ship({ length, shipImage, ships, setShips }) {
+function Ship({ length, shipImage, ships }) {
+
+    const [rotation, setRotation] = useState('horizontal');
+
+    const toggleRotation = () => {
+        setRotation(rotation === 'horizontal' ? 'vertical' : 'horizontal');
+    };
+
     const ref = useRef(null);
     const [{ isDragging }, drag, preview] = useDrag({
         type: 'ship',
-        item: { length },
+        item: { length, rotation },
         collect: (monitor) => ({
             isDragging: !!monitor.isDragging(),
         }),
@@ -25,13 +32,14 @@ function Ship({ length, shipImage, ships, setShips }) {
     }
 
     return (
-        <img 
-            src={shipImage} 
-            alt="Ship" 
-            ref={ref} 
-            style={{ width: `${length * 50}px`, height: '50px', opacity: isDragging ? 0.5 : 1 }} // Adjust size as necessary
-        />
+        <div onClick={toggleRotation}>
+            <img 
+                src={shipImage} 
+                alt="Ship" 
+                ref={ref} 
+                style={{ width: rotation === 'horizontal' ? `${length * 50}px` : '50px', height: rotation === 'horizontal' ? '50px' : `${length * 50}px`, opacity: isDragging ? 0.5 : 1 }} // Adjust size based on rotation
+            />
+        </div>
     );
 }
-
 export default Ship;

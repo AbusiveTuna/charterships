@@ -5,7 +5,7 @@ import './css/Tile.css';
 function Tile({ location, hasShip, placeShip, shipImage, shipPlacements }) { // Add shipImage prop
     const [{ isOver, canDrop }, drop] = useDrop({
         accept: 'ship',
-        drop: (item) => placeShip(location, item.length),
+        drop: (item) => placeShip(location, item.length, item.rotation),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),

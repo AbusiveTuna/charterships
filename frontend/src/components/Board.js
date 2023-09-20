@@ -8,18 +8,33 @@ function Board({ shipImages, ships, setShips, moveShip }) {
 
     const [shipPlacements, setShipPlacements] = useState({});
 
-    const placeShip = (location, length) => {
+    const placeShip = (location, length, rotation) => {
         const letter = location[0];
         const number = parseInt(location.slice(1));
-
-        //Check if the ship would go off the board
-        if (number + length > 11) {
-            return;
+    
+        // Check if the ship would go off the board
+        let shipLocations;
+        if (rotation === 'horizontal') {
+            // Check if the ship would go off the board horizontally
+            if (number + length > 11) {
+                return;
+            }
+            shipLocations = Array.from({length}, (_, i) => letter + (number + i));
+        } else {
+            // Check if the ship would go off the board vertically
+            if (letter.charCodeAt(0) - 64 + length > 11) {
+                return;
+            }
+            shipLocations = Array.from({length}, (_, i) => String.fromCharCode(letter.charCodeAt(0) + i) + number);
         }
-
-        //Create an array of locations for this ship
-        const shipLocations = Array.from({length}, (_, i) => letter + (number + i));
-
+    
+        // Check if any of the ship's locations are already occupied
+        for (const loc of shipLocations) {
+            if (shipPlacements[loc]) {
+                return;  // If a location is occupied, don't place the ship and exit the function
+            }
+        }
+    
         setShipPlacements(prevPlacements => {
             const newPlacements = {...prevPlacements};
             for (const loc of shipLocations) {
@@ -27,12 +42,13 @@ function Board({ shipImages, ships, setShips, moveShip }) {
             }
             return newPlacements;
         });
-
+    
         setShips(prevShips => ({
             ...prevShips,
             [length]: { ...prevShips[length], placed: true }
         }));
     };
+    
 
     return (
         <div className="board">
