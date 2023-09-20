@@ -68,3 +68,9 @@ const SetupPage = () => {
 };
 
 export default SetupPage;
+
+//TODO 5 unique ship images that look better.
+//TODO Submit button that saves locations to the DB
+//TODO a way to load boards when the game is hit from the game link
+//TODO shooting pieces based on codes
+//TODO Detecting when a game is over.
