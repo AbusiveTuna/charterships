@@ -30,5 +30,30 @@ h1 {
     margin-left: 50px;
 }
 
+.setup-page-submit-button, .setup-page-reset-button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
+.setup-page-submit-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
 
+.setup-page-reset-button {
+    background-color: #f44336; /* Red */
+    color: white;
+}
+
+.setup-page-submit-button:hover {
+    background-color: #45a049;
+}
+
+.setup-page-reset-button:hover {
+    background-color: #da190b;
+}

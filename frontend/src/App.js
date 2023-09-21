@@ -9,7 +9,7 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        {<Route path="/" element={<BoardSetupPage />} />
+        {<Route path="/" element={<GamePage />} />
         
         /* <Route path="/" element={<LandingPage />} />
         <Route path="/newGameDetails/:gamePin" element={<GameDetailsPage />} />

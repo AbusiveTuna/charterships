@@ -2,15 +2,15 @@ import React from 'react';
 import { useDrop } from 'react-dnd';
 import './css/Tile.css';
 
-function Tile({ location, hasShip, placeShip, shipImage, shipPlacements }) { // Add shipImage prop
-    const [{ isOver, canDrop }, drop] = useDrop({
+function Tile({ location, hasShip, placeShip, shipImage, shipPlacements, isDraggable }) { 
+    const [{ isOver, canDrop }, drop] = isDraggable ? useDrop({ 
         accept: 'ship',
         drop: (item) => placeShip(location, item.length, item.rotation),
         collect: (monitor) => ({
             isOver: !!monitor.isOver(),
             canDrop: !!monitor.canDrop(),
         }),
-    });
+    }) : [{}, null];
 
     let tileStatus = 'Empty';
     if (hasShip) {

@@ -43,6 +43,36 @@ const SetupPage = () => {
             return newPlacements;
         });
     };
+
+    const handleSubmit = () => {
+        // Call to backend
+        // fetch('https://Replaceme.com/saveBoard', {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(shipPlacements),
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     console.log('Success:', data);
+        // })
+        // .catch((error) => {
+        //     console.error('Error:', error);
+        // });
+        console.log(JSON.stringify(shipPlacements));
+    };
+
+    const handleReset = () => {
+        // Reset the board
+        setShips({
+            2: { length: 2, placed: false },
+            3: { length: 3, placed: false },
+            4: { length: 4, placed: false },
+            5: { length: 5, placed: false }
+        });
+        setShipPlacements({});
+    };
     
     
     return (
@@ -52,7 +82,15 @@ const SetupPage = () => {
                 <p>This is the setup page for board with PIN: {boardPin}</p>
                 <div className="board-container">
                     <div className="board">
-                    <Board shipImages={shipImages} ships={ships} setShips={setShips} moveShip={moveShip} shipPlacements={shipPlacements} setShipPlacements={setShipPlacements} />
+                    <Board 
+                        shipImages={shipImages} 
+                        ships={ships} 
+                        setShips={setShips} 
+                        moveShip={moveShip} 
+                        shipPlacements={shipPlacements} 
+                        setShipPlacements={setShipPlacements} 
+                        isSetUp={true}
+                    />
                     </div>
                     <div className="ships">
                         <Ship length={2} shipImage={shipImage} ships={ships} setShips={setShips} />
@@ -62,15 +100,11 @@ const SetupPage = () => {
                         <Ship length={5} shipImage={shipImage} ships={ships} setShips={setShips} />
                     </div>
                 </div>
+                <button className="setup-page-submit-button" onClick={handleSubmit}>Submit</button>
+                <button className="setup-page-reset-button" onClick={handleReset}>Reset</button>
             </div>
         </DndProvider>
     );
 };
 
 export default SetupPage;
-
-//TODO 5 unique ship images that look better.
-//TODO Submit button that saves locations to the DB
-//TODO a way to load boards when the game is hit from the game link
-//TODO shooting pieces based on codes
-//TODO Detecting when a game is over.

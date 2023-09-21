@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import Tile from './Tile';
 import './css/Board.css';
 
-function Board({ shipImages, ships, setShips, moveShip }) {
-
+function Board({ shipImages, ships, setShips, moveShip, shipPlacements, setShipPlacements, isSetUp }) {
     const locations = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'].flatMap(letter => Array.from({length: 10}, (_, i) => letter + (i + 1)));
-
-    const [shipPlacements, setShipPlacements] = useState({});
 
     const placeShip = (location, length, rotation) => {
         const letter = location[0];
@@ -64,6 +61,7 @@ function Board({ shipImages, ships, setShips, moveShip }) {
                         moveShip={moveShip} 
                         shipImage={shipImages[shipPlacements[location]]}
                         shipPlacements={shipPlacements}
+                        isSetUp={isSetUp}
                     />
                 </React.Fragment>
             ))}
