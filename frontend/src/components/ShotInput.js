@@ -5,6 +5,10 @@ function ShotInput() {
     const [tile, setTile] = useState('');
     const [activationCode, setActivationCode] = useState('');
 
+    //TODO:
+    //Limit both inputs to only certain characters/whatever size.
+    //Fix CSS
+    //Configure AWS and get these calls setup.
     const handleFire = () => {
         // Handle the fire event here
     };

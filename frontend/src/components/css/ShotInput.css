@@ -1,20 +1,35 @@
 .shot-input {
+    width: 15%;
+    height: 40%;
     background-color: green;
     padding: 20px;
-    width: 100%;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .shot-input label {
-    display: block;
+    font-size: 1.5em;
     margin-bottom: 10px;
+    white-space: nowrap;
 }
 
-.shot-input input {
-    width: 100%;
-    margin-bottom: 20px;
+.shot-input label input {
+    display: block; 
+    margin-top: 5px;
 }
 
 .shot-input button {
-    width: 100%;
+    width: 200px;
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: auto; 
+    padding: 10px;
+    border-radius: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.shot-input button:hover {
+    background-color: #ff6347;
 }
